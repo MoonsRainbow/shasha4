@@ -1,0 +1,8 @@
+'requests',
+'tqdm',
+'bs4',
+'pandas',
+'konlpy',
+'wordcloud',
+'matplotlib',
+'numpy'

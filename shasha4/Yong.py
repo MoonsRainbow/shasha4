@@ -24,7 +24,7 @@ def get_top_stock():
     df_top_stocks = df_top_stocks.reset_index(drop=True)
 
     # 코드를 찾아서 추가하기
-    find_tag = bs(response.text, 'html.parser', features="lxml")
+    find_tag = bs(response.text, 'html.parser')
     code = []
     for i in find_tag.select('td > a'):
         code.append(i["href"].split("=")[-1])

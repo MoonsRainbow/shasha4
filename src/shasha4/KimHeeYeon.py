@@ -25,7 +25,7 @@ def fn_page_scrapping(date, page_no):
     response = requests.post(url, params=params, headers=headers, verify=False)
    
     # 3) bs 적용
-    html = bs(response.text)
+    html = bs(response.text, 'html.parser')
 
     # 4) 테이블 찾기
     df = html.select("#contentarea_left > div > ul > li > ul > li > a")
@@ -51,7 +51,7 @@ def fn_get_content(link):
     response = requests.get(url, verify=False)
 
     # 3) response.text에 BeautifulSoup 적용하기
-    html = bs(response.text)
+    html = bs(response.text, 'html.parser')
 
     # 4) 내용 가져오기    
     content = html.find_all("div", {"id": "content"})[0].text
@@ -70,7 +70,7 @@ def fn_most_viewed_news(date):
     params = f"mode=RANK&date={date}"
     headers = {"user-agent": "Mozilla/5.0"}
     response = requests.post(url, params=params, headers=headers, verify=False)
-    html = bs(response.text)
+    html = bs(response.text, 'html.parser')
 
     last_page = int(html.select("table > tr > td.pgRR > a")[-1]["href"].split("=")[-1])
 
@@ -117,7 +117,6 @@ def wc1_make_wc(date):
     stopwords = set(STOPWORDS)
 
     wc = WordCloud(max_font_size=200,
-                   font_path=font_path,
                    background_color="white",
                    width=2000, height=500,
                    stopwords=stopwords).generate_from_frequencies(word)
@@ -162,7 +161,6 @@ def wc2_make_wc(date):
     stopwords = set(STOPWORDS)
 
     wc = WordCloud(max_font_size=200,
-                   font_path=font_path,
                    background_color="white",
                    width=2000, height=500,
                    stopwords=stopwords).generate_from_frequencies(word)

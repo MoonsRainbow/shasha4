@@ -1,6 +1,5 @@
 import time
 import requests
-import numpy as np
 import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
@@ -31,7 +30,7 @@ class Upjong:
         df = df.drop('등락그래프', axis=1)
         df[['전체', '상승', '보합', '하락']] = df[['전체', '상승', '보합', '하락']].astype(int)
 
-        html = bs(response.text)
+        html = bs(response.text, 'html.parser')
         upjong_no = [link['href'].split('&')[-1].replace('no=','') for link in html.select('td > a')[:-5]]
         df['업종번호'] = upjong_no
 
@@ -173,7 +172,7 @@ class Theme:
         '''
         url_for_end = 'https://finance.naver.com/sise/theme.naver'
         response = requests.get(url_for_end)
-        html = bs(response.text)
+        html = bs(response.text, 'html.parser')
         end_page = int(html.select('td.pgRR > a')[0]['href'][-1])
 
         pages_by_theme = []
@@ -203,7 +202,7 @@ class Theme:
             page[['전체', '상승', '보합', '하락']] = page[['전체', '상승', '보합', '하락']].astype(int)
 
             # 테마번호 컬럼 추가
-            html = bs(response.text)
+            html = bs(response.text, 'html.parser')
             theme_num = []
             for link in html.select('tr > td > a')[:-15][::3]:
                 theme_num.append(link['href'].split('=')[-1])
@@ -359,7 +358,7 @@ class Groupsa:
         df = df.drop('등락그래프', axis=1)
         df[['전체', '상승', '보합', '하락']] = df[['전체', '상승', '보합', '하락']].astype(int)
 
-        html = bs(response.text)
+        html = bs(response.text, 'html.parser')
         group_no = [link['href'].split('&')[-1].replace('no=','') for link in html.select('td > a')[:-5]]
         df['그룹번호'] = group_no
 

@@ -19,7 +19,7 @@ def get_upjong_list_K():
     df = df.drop('등락그래프', axis=1)
     df[['전체', '상승', '보합', '하락']] = df[['전체', '상승', '보합', '하락']].astype(int)
 
-    html = bs(response.text)
+    html = bs(response.text, 'html.parser')
     link_list = html.select('td > a')
     link_list = link_list[:-5]
     temp = []
@@ -61,7 +61,7 @@ def jongmok_list():
         df_detail = df_detail.dropna(how='all', axis=1)
         df_detail = df_detail.dropna(how='all')
         df_detail['upjong_code'] = i
-        html = bs(response_detail.text)
+        html = bs(response_detail.text, 'html.parser')
         jongmok_codes = html.select('table > tbody > tr > td > div > a')
         jongmok_code_list = []
         for jongmok_code in jongmok_codes:
@@ -89,7 +89,7 @@ def get_theme_list():
     '''
     url_for_end = 'https://finance.naver.com/sise/theme.naver'
     response = requests.get(url_for_end)
-    html = bs(response.text)
+    html = bs(response.text, 'html.parser')
     end_page = int(html.select('td.pgRR > a')[0]['href'][-1])
 
     pages_by_theme = []
@@ -108,7 +108,7 @@ def get_theme_list():
         page.columns = cols
 
         # 테마번호 컬럼 추가
-        html = bs(response.text)
+        html = bs(response.text, 'html.parser')
         theme_num = []
         for link in html.select('tr > td > a')[:-15][::3]:
             theme_num.append(link['href'].split('=')[-1])

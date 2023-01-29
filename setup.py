@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='shasha4',
-    version='0.0.0.4',
+    version='0.0.7',
     description='For Scraping Naver Finance',
     url='https://github.com/MoonsRainbow/shasha4.git',
     author='MoonsRainbow',
@@ -18,7 +18,6 @@ setup(
         'pandas',
         'konlpy',
         'wordcloud',
-        'matplotlib',
-        'numpy'
+        'matplotlib'
     ]
 )

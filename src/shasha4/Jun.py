@@ -76,14 +76,14 @@ class ControlTower:
         df = df.dropna(axis=0, how='all')
         df = df.reset_index(drop=True)
         df = df.astype({'전체': int, '상승': int, '보합': int, '하락': int})
-        html = bs(resp.text)
+        html = bs(resp.text, 'html.parser')
         df['업종 코드'] = [tag_a['href'].split('=')[-1] for tag_a in html.find('table', {'class': 'type_1'}).find_all('a')]
         return df
 
     def get_upjong_items(self, upjong_code):
         if upjong_code not in self.__upjong_items:
             resp = request('get', self.__items_uri.format(upjong_code), headers=HEADERS)
-            self.__upjong_items[upjong_code] = {tag_a.text: tag_a['href'].split('=')[-1] for tag_a in bs(resp.text).select('div.name_area > a')}
+            self.__upjong_items[upjong_code] = {tag_a.text: tag_a['href'].split('=')[-1] for tag_a in bs(resp.text, 'html.parser').select('div.name_area > a')}
         return self.__upjong_items[upjong_code]
 
     def get_items_auto(self, upjong_code):

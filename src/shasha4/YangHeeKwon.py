@@ -1,6 +1,8 @@
 import time
+import platform
 import requests
 import pandas as pd
+from matplotlib import rc
 from datetime import datetime
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup as bs
@@ -13,7 +15,10 @@ class Upjong:
     def __init__(self, upjong_nm, upjong_num):
         self.upjong_nm = upjong_nm
         self.upjong_num = upjong_num
-        plt.rcParams['font.family'] = 'Malgun Gothic'
+        if platform.system() == 'Darwin':
+            rc('font', family='AppleGothic')
+        else:
+            plt.rcParams['font.family'] = 'Malgun Gothic'
 
     @staticmethod
     def get_page_sise_by_upjong():
@@ -161,7 +166,10 @@ class Theme:
     def __init__(self, theme_nm, theme_num):
         self.theme_nm = theme_nm
         self.theme_num = theme_num
-        plt.rcParams['font.family'] = 'Malgun Gothic'
+        if platform.system() == 'Darwin':
+            rc('font', family='AppleGothic')
+        else:
+            plt.rcParams['font.family'] = 'Malgun Gothic'
 
     @staticmethod
     def get_pages_sise_by_theme():
@@ -341,7 +349,10 @@ class Groupsa:
     def __init__(self, group_nm, group_num):
         self.group_nm = group_nm
         self.group_num = group_num
-        plt.rcParams['font.family'] = 'Malgun Gothic'
+        if platform.system() == 'Darwin':
+            rc('font', family='AppleGothic')
+        else:
+            plt.rcParams['font.family'] = 'Malgun Gothic'
 
     @staticmethod
     def get_page_sise_by_group():

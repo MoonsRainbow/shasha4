@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='shasha4',
-    version='0.0.9',
+    version='1.0.0',
     description='For Scraping Naver Finance',
     url='https://github.com/MoonsRainbow/shasha4.git',
     author='MoonsRainbow',
